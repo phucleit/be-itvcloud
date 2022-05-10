@@ -20,6 +20,16 @@ const websiteController = {
         } catch(err) {
             res.status(500).json(err);
         }
+    },
+
+    // delete website
+    deleteWebsite: async(req, res) => {
+        try {
+            await Website.findByIdAndDelete(req.params.id);
+            res.status(200).json('Deleted successfully');
+        } catch(err) {
+            res.status(500).json(err);
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const opts = { toJSON: { virtuals: true } };
 
 const userWebsiteSchema = new mongoose.Schema({
     hoten: {
@@ -6,7 +7,7 @@ const userWebsiteSchema = new mongoose.Schema({
         required: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
     website: {
@@ -32,7 +33,7 @@ const userWebsiteSchema = new mongoose.Schema({
     ghichu: {
         type: String
     }
-});
+}, opts);
 
 let Website = mongoose.model('Website', userWebsiteSchema);
 module.exports = {Website};
