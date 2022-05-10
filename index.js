@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 
+const websiteRouter = require('./routes/website');
+
 dotenv.config();
 // connect database
 mongoose.connect((process.env.MONGODB_URL), () => {
@@ -15,6 +17,9 @@ mongoose.connect((process.env.MONGODB_URL), () => {
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(cors());
 app.use(morgan('common'));
+
+// routes
+app.use('/website', websiteRouter);
 
 // listen port
 app.listen(8000, () => {
