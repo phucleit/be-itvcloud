@@ -8,6 +8,8 @@ const dotenv = require('dotenv');
 
 const websiteRouter = require('./routes/website');
 const laptopRouter = require('./routes/laptop');
+const accountRouter = require('./routes/account');
+const loginRouter = require('./routes/login');
 
 dotenv.config();
 // connect database
@@ -22,6 +24,8 @@ app.use(morgan('common'));
 // routes
 app.use('/website', websiteRouter);
 app.use('/laptop', laptopRouter);
+app.use('/account', accountRouter);
+app.use('/login', loginRouter);
 
 // listen port
 app.listen(8000, () => {
