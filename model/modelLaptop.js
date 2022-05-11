@@ -18,6 +18,9 @@ const userLaptopSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mamay: {
+        type: String
+    },
     tinhtrangmay: {
         type: String,
         required: true
