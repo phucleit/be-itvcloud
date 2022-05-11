@@ -30,6 +30,27 @@ const websiteController = {
         } catch(err) {
             res.status(500).json(err);
         }
+    },
+
+    // get detail website
+    getDetailWebsite: async(req, res) => {
+        try {
+            const website = await Website.findById(req.params.id);
+            res.status(200).json(website);
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    //update website
+    updateWebsite: async(req, res) => {
+        try {
+            const website = await Website.findById(req.params.id);
+            await website.updateOne({$set: req.body});
+            res.status(200).json('Updated successfully');
+        } catch(err) {
+            res.status(500).json(err);
+        }
     }
 }
 
