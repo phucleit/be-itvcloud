@@ -1,4 +1,4 @@
-const { Website } = require('../model/model');
+const { Website } = require('../model/modelWebsite');
 
 const websiteController = {
     //add website

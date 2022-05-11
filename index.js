@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 
 const websiteRouter = require('./routes/website');
+const laptopRouter = require('./routes/laptop');
 
 dotenv.config();
 // connect database
@@ -20,6 +21,7 @@ app.use(morgan('common'));
 
 // routes
 app.use('/website', websiteRouter);
+app.use('/laptop', laptopRouter);
 
 // listen port
 app.listen(8000, () => {
