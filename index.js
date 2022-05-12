@@ -22,10 +22,10 @@ app.use(cors());
 app.use(morgan('common'));
 
 // routes
-app.use('/website', websiteRouter);
-app.use('/laptop', laptopRouter);
-app.use('/account', accountRouter);
-app.use('/login', loginRouter);
+app.use('/api/website', websiteRouter);
+app.use('/api/laptop', laptopRouter);
+app.use('/api/account', accountRouter);
+app.use('/api/login', loginRouter);
 
 // listen port
 const PORT = process.env.PORT || 8000;
