@@ -11,7 +11,7 @@ const laptopRouter = require('./routes/laptop');
 const accountRouter = require('./routes/account');
 const loginRouter = require('./routes/login');
 
-dotenv.config();
+dotenv.config({path: ".env"});
 // connect database
 mongoose.connect((process.env.MONGODB_URL), () => {
     console.log('Connected to MongoDB');
