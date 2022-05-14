@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 
 const websiteRouter = require('./routes/website');
 const laptopRouter = require('./routes/laptop');
-const accountRouter = require('./routes/account');
+const userRouter = require('./routes/user');
 const loginRouter = require('./routes/login');
 const serviceRouter = require('./routes/service');
 
@@ -25,7 +25,7 @@ app.use(morgan('common'));
 // routes
 app.use('/api/website', websiteRouter);
 app.use('/api/laptop', laptopRouter);
-app.use('/api/account', accountRouter);
+app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/service', serviceRouter);
 

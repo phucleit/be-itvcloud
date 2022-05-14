@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const opts = { toJSON: { virtuals: true } };
 
-const accountSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     hoten: {
         type: String,
         required: true
@@ -23,5 +23,5 @@ const accountSchema = new mongoose.Schema({
     },
 }, opts);
 
-let Account = mongoose.model('Account', accountSchema);
-module.exports = {Account};
+let User = mongoose.model('User', userSchema);
+module.exports = {User};
