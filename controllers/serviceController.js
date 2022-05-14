@@ -1,6 +1,7 @@
 const md5 = require("md5");
 
 const { Service } = require('../model/modelService');
+const { Website } = require('../model/modelWebsite');
 
 const serviceController = {
     //add service
@@ -27,6 +28,7 @@ const serviceController = {
     // delete service
     deleteService: async(req, res) => {
         try {
+            await Website.updateMany({service: req.params.id}, {service: null});
             await Service.findByIdAndDelete(req.params.id);
             res.status(200).json('Deleted successfully');
         } catch(err) {
@@ -37,7 +39,7 @@ const serviceController = {
     // get detail service
     getDetailService: async(req, res) => {
         try {
-            const service = await Service.findById(req.params.id);
+            const service = await Service.findById(req.params.id).populate('website');;
             res.status(200).json(service);
         } catch(err) {
             res.status(500).json(err);
