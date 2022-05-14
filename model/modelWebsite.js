@@ -6,6 +6,10 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    cmnd: {
+        type: String,
+        required: true,
+    },
     phone: {
         type: String,
         required: true
@@ -18,10 +22,6 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    trangthai: {
-        type: String,
-        required: true
-    },
     khuvuc: {
         type: String,
         required: true
@@ -30,7 +30,14 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    service: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Service"
+    },
     ghichu: {
+        type: String
+    },
+    createdDate: {
         type: String
     }
 }, opts);

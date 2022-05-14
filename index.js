@@ -10,6 +10,7 @@ const websiteRouter = require('./routes/website');
 const laptopRouter = require('./routes/laptop');
 const accountRouter = require('./routes/account');
 const loginRouter = require('./routes/login');
+const serviceRouter = require('./routes/service');
 
 dotenv.config({path: ".env"});
 // connect database
@@ -26,6 +27,7 @@ app.use('/api/website', websiteRouter);
 app.use('/api/laptop', laptopRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/service', serviceRouter);
 
 // listen port
 const PORT = process.env.PORT || 8000;

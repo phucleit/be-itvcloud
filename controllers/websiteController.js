@@ -1,11 +1,28 @@
 const { Website } = require('../model/modelWebsite');
+const { Service } = require('../model/modelService');
 
 const websiteController = {
     //add website
     addWebsite: async(req, res) => {
         try {
+            // let current_date = new Date();
+            // const newWebsite = new Website({
+            //     hoten: req.body.hoten,
+            //     cmnd: req.body.cmnd,
+            //     phone: req.body.phone,
+            //     website: req.body.website,
+            //     nhanvienphutrach: req.body.nhanvienphutrach,
+            //     khuvuc: req.body.khuvuc,
+            //     goidungluong: req.body.goidungluong,
+            //     ghichu: req.body.ghichu,
+            //     createdDate: current_date
+            // });
             const newWebsite = new Website(req.body);
             const savedWebsite = await newWebsite.save();
+            if (req.body.service) {
+                const service = Service.findById(req.body.service);
+                await service.updateOne({$push: {website: savedWebsite.id}});
+            }
             res.status(200).json(savedWebsite);
         } catch(err) {
             res.status(500).json(err);
@@ -15,7 +32,7 @@ const websiteController = {
     // get all websites
     getAllWebsites: async(req, res) => {
         try {
-            const websites = await Website.find();
+            const websites = await Website.find().populate("service");
             res.status(200).json(websites);
         } catch(err) {
             res.status(500).json(err);
