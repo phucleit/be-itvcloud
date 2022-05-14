@@ -27,8 +27,7 @@ const userWebsiteSchema = new mongoose.Schema({
         required: true
     },
     goidungluong: {
-        type: String,
-        required: true
+        type: String
     },
     service: {
         type: mongoose.Schema.Types.ObjectId,
