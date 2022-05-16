@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const jsonwebtoken = require("jsonwebtoken");
 
 const websiteRouter = require('./routes/website');
 const laptopRouter = require('./routes/laptop');
 const userRouter = require('./routes/user');
-const loginRouter = require('./routes/login');
 const serviceRouter = require('./routes/service');
 
 dotenv.config({path: ".env"});
@@ -26,8 +26,21 @@ app.use(morgan('common'));
 app.use('/api/website', websiteRouter);
 app.use('/api/laptop', laptopRouter);
 app.use('/api/user', userRouter);
-app.use('/api/login', loginRouter);
 app.use('/api/service', serviceRouter);
+
+// login
+app.use(function(req, res, next) {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err, decode) {
+            if (err) req.user = undefined;
+            req.user = decode;
+            next();
+        });
+    } else {
+      req.user = undefined;
+      next();
+    }
+});
 
 // listen port
 const PORT = process.env.PORT || 8000;

@@ -1,5 +1,3 @@
-const md5 = require("md5");
-
 const { Service } = require('../model/modelService');
 const { Website } = require('../model/modelWebsite');
 

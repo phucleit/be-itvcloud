@@ -1,4 +1,5 @@
-const md5 = require("md5");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const { User } = require('../model/modelUser');
 
@@ -6,13 +7,8 @@ const userController = {
     //add user
     addUser: async(req, res) => {
         try {
-            const newUser = new User({
-                hoten: req.body.hoten,
-                username: req.body.username,
-                password: md5(req.body.password),
-                email: req.body.email,
-                phone: req.body.phone,
-            });
+            const newUser = new User(req.body);
+            newUser.password = bcrypt.hashSync(req.body.password, 10);
             const savedUser = await newUser.save();
             res.status(200).json(savedUser);
         } catch(err) {
@@ -60,6 +56,34 @@ const userController = {
             res.status(500).json(err);
         }
     },
+
+    signInUser: async(req, res) => {
+        try {
+            User.findOne({$or: [
+                {username: req.body.username},
+                {email: req.body.email},
+            ]}, function(err, user) {
+                if (err) {
+                    res.status(500).json(err);
+                }
+                if (!user) {
+                    res.status(401).json({ message: 'Authentication failed. User not found.' });
+                } else {
+                    if (!user.comparePassword(req.body.password)) {
+                        res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+                    } else {
+                        return res.json({
+                            token: jwt.sign({ email: user.email, hoten: user.hoten, username: user.username, _id: user._id}, 'RESTFULAPIs'),
+                            hoten: user.hoten, 
+                            username: user.username
+                        });
+                    }
+                }
+            });
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    }
 }
 
 module.exports = userController;
