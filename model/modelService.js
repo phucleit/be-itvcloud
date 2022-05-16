@@ -15,9 +15,10 @@ const serviceSchema = new mongoose.Schema({
             ref: "Website"
         }
     ],
-    createdDate: {
-        type: String
-    }
+    created: {
+        type: Date,
+        default: Date.now
+    },
 }, opts);
 
 let Service = mongoose.model('Service', serviceSchema);

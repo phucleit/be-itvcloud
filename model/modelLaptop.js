@@ -37,6 +37,10 @@ const userLaptopSchema = new mongoose.Schema({
     },
     phuongthucthanhtoan: {
         type: String
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 }, opts);
 
