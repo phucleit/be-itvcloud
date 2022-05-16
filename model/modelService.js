@@ -15,7 +15,7 @@ const serviceSchema = new mongoose.Schema({
             ref: "Website"
         }
     ],
-    created: {
+    createdAt: {
         type: Date,
         default: Date.now
     },

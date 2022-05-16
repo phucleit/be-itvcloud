@@ -38,7 +38,7 @@ const userLaptopSchema = new mongoose.Schema({
     phuongthucthanhtoan: {
         type: String
     },
-    created: {
+    createdAt: {
         type: Date,
         default: Date.now
     }

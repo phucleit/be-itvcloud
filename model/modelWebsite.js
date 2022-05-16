@@ -36,7 +36,7 @@ const userWebsiteSchema = new mongoose.Schema({
     ghichu: {
         type: String
     },
-    created: {
+    createdAt: {
         type: Date,
         default: Date.now
     }

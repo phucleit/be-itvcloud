@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    created: {
+    createdAt: {
         type: Date,
         default: Date.now
     }
