@@ -1,7 +1,7 @@
 const { Permission } = require('../model/modelPermission')
 
 const permissionController = {
-    //add service
+    //add permission
     addPermission: async(req, res) => {
         try {
             const newPermission = new Permission(req.body);
@@ -12,7 +12,7 @@ const permissionController = {
         }
     },
 
-    // get all services
+    // get all permissions
     getAllPermissions: async(req, res) => {
         try {
             const permission = await Permission.find();
