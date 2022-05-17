@@ -11,6 +11,7 @@ const websiteRouter = require('./routes/website');
 const laptopRouter = require('./routes/laptop');
 const userRouter = require('./routes/user');
 const serviceRouter = require('./routes/service');
+const permissionRouter = require('./routes/permission');
 
 dotenv.config({path: ".env"});
 // connect database
@@ -32,6 +33,7 @@ app.use('/api/website', websiteRouter);
 app.use('/api/laptop', laptopRouter);
 app.use('/api/user', userRouter);
 app.use('/api/service', serviceRouter);
+app.use('/api/permission', permissionRouter);
 
 // login
 app.use(function(req, res, next) {
