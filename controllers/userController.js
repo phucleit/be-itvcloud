@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const { User } = require('../model/modelUser');
+const { Role } = require('../model/modelRole');
 
 const userController = {
     //add user
@@ -10,6 +11,10 @@ const userController = {
             const newUser = new User(req.body);
             newUser.password = bcrypt.hashSync(req.body.password, 10);
             const savedUser = await newUser.save();
+            if (req.body.roles) {
+                const roles = Role.findById(req.body.roles);
+                await roles.updateOne({$push: {roles: savedUser.id}});
+            }
             res.status(200).json(savedUser);
         } catch(err) {
             res.status(500).json(err);
@@ -19,7 +24,7 @@ const userController = {
     // get all users
     getAllUsers: async(req, res) => {
         try {
-            const users = await User.find();
+            const users = await User.find().populate("roles");
             res.status(200).json(users);
         } catch(err) {
             res.status(500).json(err);
@@ -39,7 +44,7 @@ const userController = {
     // get detail user
     getDetailUser: async(req, res) => {
         try {
-            const user = await User.findById(req.params.id);
+            const user = await User.findById(req.params.id).populate("roles");
             res.status(200).json(user);
         } catch(err) {
             res.status(500).json(err);
