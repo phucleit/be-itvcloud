@@ -47,7 +47,7 @@ const websiteController = {
     // get detail website
     getDetailWebsite: async(req, res) => {
         try {
-            const website = await Website.findById(req.params.id).populate("service");
+            const website = await Website.findById(req.params.id).populate("service").populate("status");
             res.status(200).json(website);
         } catch(err) {
             res.status(500).json(err);
