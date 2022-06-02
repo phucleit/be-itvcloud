@@ -9,6 +9,12 @@ const statusSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    website: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Website"
+        }
+    ],
     createdAt: {
         type: Date,
         default: Date.now

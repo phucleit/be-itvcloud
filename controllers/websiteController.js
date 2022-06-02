@@ -1,5 +1,6 @@
 const { Website } = require('../model/modelWebsite');
 const { Service } = require('../model/modelService');
+const { Status } = require('../model/modelStatus');
 
 const websiteController = {
     //add website
@@ -11,6 +12,10 @@ const websiteController = {
                 const service = Service.findById(req.body.service);
                 await service.updateOne({$push: {website: savedWebsite.id}});
             }
+            if (req.body.status) {
+                const status = Status.findById(req.body.status);
+                await status.updateOne({$push: {website: savedWebsite.id}});
+            }
             res.status(200).json(savedWebsite);
         } catch(err) {
             res.status(500).json(err);
@@ -20,7 +25,7 @@ const websiteController = {
     // get all websites
     getAllWebsites: async(req, res) => {
         try {
-            const websites = await Website.find().populate("service");
+            const websites = await Website.find().populate("service").populate("status");
             res.status(200).json(websites);
         } catch(err) {
             res.status(500).json(err);
@@ -31,6 +36,7 @@ const websiteController = {
     deleteWebsite: async(req, res) => {
         try {
             await Service.updateMany({website: req.params.id}, {$pull: {website: req.params.id}});
+            await Status.updateMany({website: req.params.id}, {$pull: {website: req.params.id}});
             await Website.findByIdAndDelete(req.params.id);
             res.status(200).json('Deleted successfully');
         } catch(err) {

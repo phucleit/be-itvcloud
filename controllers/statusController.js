@@ -15,7 +15,7 @@ const statusController = {
     // get all status
     getAllStatus: async(req, res) => {
         try {
-            const status = await Status.find();
+            const status = await Status.find().populate("website");
             res.status(200).json(status);
         } catch(err) {
             res.status(500).json(err);

@@ -33,6 +33,10 @@ const userWebsiteSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Service"
     },
+    status: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Status"
+    },
     ghichu: {
         type: String
     },
