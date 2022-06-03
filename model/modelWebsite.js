@@ -38,7 +38,7 @@ const userWebsiteSchema = new mongoose.Schema({
         ref: "Status"
     },
     chiphi: {
-        type: String,
+        type: Number,
         required: true
     },
     ghichu: {

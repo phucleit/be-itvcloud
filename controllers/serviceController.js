@@ -37,7 +37,7 @@ const serviceController = {
     // get detail service
     getDetailService: async(req, res) => {
         try {
-            const service = await Service.findById(req.params.id).populate('website');;
+            const service = await Service.findById(req.params.id).populate('website');
             res.status(200).json(service);
         } catch(err) {
             res.status(500).json(err);
