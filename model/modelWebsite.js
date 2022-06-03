@@ -37,6 +37,10 @@ const userWebsiteSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Status"
     },
+    chiphi: {
+        type: String,
+        required: true
+    },
     ghichu: {
         type: String
     },
