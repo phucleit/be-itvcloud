@@ -7,6 +7,7 @@ const websiteController = {
     addWebsite: async(req, res) => {
         try {
             const newWebsite = new Website(req.body);
+
             const savedWebsite = await newWebsite.save();
             if (req.body.service) {
                 const service = Service.findById(req.body.service);

@@ -45,9 +45,12 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String
     },
     createdAt: {
-        type: Date,
-        default: Date.now
-    }
+        type: Date
+    },
+    expiredAt: {
+        type: Date
+    },
+
 }, opts);
 
 let Website = mongoose.model('Website', userWebsiteSchema);
