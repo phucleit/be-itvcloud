@@ -64,6 +64,19 @@ const websiteController = {
         } catch(err) {
             res.status(500).json(err);
         }
+    },
+
+    //get website expired
+    getWebsiteExpired: async(req, res) => {
+        try {
+            var currentDate = new Date();
+            const result = await Website.find({
+                expiredAt: {$lte: currentDate}
+            }).populate("service").populate("status");
+            res.status(200).json(result);
+        } catch(err) {
+            res.status(500).json(err);
+        }
     }
 }
 
