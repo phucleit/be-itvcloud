@@ -8,5 +8,6 @@ router.delete('/:id', websiteController.deleteWebsite);
 router.get('/:id', websiteController.getDetailWebsite);
 router.put('/:id', websiteController.updateWebsite);
 router.get('/website/expired', websiteController.getWebsiteExpired);
+router.get('/website/toexpired', websiteController.getWebsiteToExpired);
 
 module.exports = router;

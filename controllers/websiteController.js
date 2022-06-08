@@ -1,6 +1,9 @@
+const dayjs = require('dayjs');
+
 const { Website } = require('../model/modelWebsite');
 const { Service } = require('../model/modelService');
 const { Status } = require('../model/modelStatus');
+const { format } = require('express/lib/response');
 
 const websiteController = {
     //add website
@@ -55,7 +58,7 @@ const websiteController = {
         }
     },
 
-    //update website
+    // update website
     updateWebsite: async(req, res) => {
         try {
             const website = await Website.findById(req.params.id);
@@ -66,12 +69,30 @@ const websiteController = {
         }
     },
 
-    //get website expired
+    // get website expired
     getWebsiteExpired: async(req, res) => {
         try {
             var currentDate = new Date();
             const result = await Website.find({
                 expiredAt: {$lte: currentDate}
+            }).populate("service").populate("status");
+            res.status(200).json(result);
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // get website to expred
+    getWebsiteToExpired:  async(req, res) => {
+        try {
+            var currentDate = new Date();
+            var dateExpired = dayjs(currentDate).add(30, 'day');
+            
+            const result = await Website.find({
+                expiredAt: {
+                    $gte: dayjs(currentDate).startOf('day').toDate(),
+                    $lte: dayjs(dateExpired).endOf('day').toDate()
+                }
             }).populate("service").populate("status");
             res.status(200).json(result);
         } catch(err) {
