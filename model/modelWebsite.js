@@ -20,7 +20,6 @@ const userWebsiteSchema = new mongoose.Schema({
     },
     nhanvienphutrach: {
         type: String,
-        required: true
     },
     khuvuc: {
         type: String,

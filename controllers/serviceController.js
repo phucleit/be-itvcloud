@@ -44,7 +44,7 @@ const serviceController = {
         }
     },
 
-    //update service
+    // update service
     updateService: async(req, res) => {
         try {
             const service = await Service.findById(req.params.id);
@@ -54,6 +54,20 @@ const serviceController = {
             res.status(500).json(err);
         }
     },
+
+    // getwebsite
+    getDomainExpired: async(req, res) => {
+        try {
+            const services = await Service.find().populate('website');
+            const website = services[0].website;
+            res.status(200).json(website);
+            // services[0].website.forEach(item => {
+            //     res.status(200).json('Updated successfully');
+            // });
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    }
 }
 
 module.exports = serviceController;
