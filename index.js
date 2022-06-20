@@ -15,6 +15,7 @@ const permissionRouter = require('./routes/permission');
 const roleRouter = require('./routes/role');
 const statusRouter = require('./routes/status');
 const packageRouter = require('./routes/package');
+const reportRouter = require('./routes/report');
 
 dotenv.config({path: ".env"});
 // connect database
@@ -30,6 +31,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use('/uploads', express.static('uploads'));
 
 // routes
 app.use('/api/website', websiteRouter);
@@ -40,6 +42,7 @@ app.use('/api/permission', permissionRouter);
 app.use('/api/role', roleRouter);
 app.use('/api/status', statusRouter);
 app.use('/api/package', packageRouter);
+app.use('/api/report', reportRouter);
 
 // login
 app.use(function(req, res, next) {
