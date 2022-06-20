@@ -1,7 +1,7 @@
 const { Report } = require('../model/modelReport');
 
 const reportController = {
-    //add report
+    // add report
     addReport: async(req, res) => {
         try {
             const newReport = new Report(req.body);
@@ -20,7 +20,7 @@ const reportController = {
         }
     },
 
-    //get report
+    // get report
     getReport: async(req, res) => {
         try {
             const reports = await Report.find();
@@ -30,11 +30,32 @@ const reportController = {
         }
     },
 
-    //delete report
+    // delete report
     deleteReport: async(req, res) => {
         try {
             await Report.findByIdAndDelete(req.params.id);
             res.status(200).json('Deleted successfully');
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // get detail report
+    getDetailReport: async(req, res) => {
+        try {
+            const report = await Report.findById(req.params.id);
+            res.status(200).json(report);
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // update report
+    updateReport: async(req, res) => {
+        try {
+            const report = await Report.findById(req.params.id);
+            await report.updateOne({$set: req.body});
+            res.status(200).json('Updated successfully');
         } catch(err) {
             res.status(500).json(err);
         }
