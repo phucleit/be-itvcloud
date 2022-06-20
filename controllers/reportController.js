@@ -23,12 +23,22 @@ const reportController = {
     //get report
     getReport: async(req, res) => {
         try {
-            console.log('a')     ;
+            const reports = await Report.find();
+            res.status(200).json(reports);
         } catch(err) {
             res.status(500).json(err);
         }
     },
 
+    //delete report
+    deleteReport: async(req, res) => {
+        try {
+            await Report.findByIdAndDelete(req.params.id);
+            res.status(200).json('Deleted successfully');
+        } catch(err) {
+            res.status(500).json(err);
+        }
+    },
 }
 
 module.exports = reportController;
