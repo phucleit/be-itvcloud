@@ -63,6 +63,23 @@ const customerController = {
     updateCustomer: async(req, res) => {
         try {
             const customer = await Customer.findById(req.params.id);
+            if (req.files.cmnd_mat_truoc) {
+                let path = '';
+                req.files.cmnd_mat_truoc.forEach(function(files, index, arr) {
+                    path = path + files.path + ',';
+                });
+                path = path.substring(0, path.lastIndexOf(','));
+                customer.cmnd_mat_truoc = path;
+            }
+
+            if (req.files.cmnd_mat_sau) {
+                let path = '';
+                req.files.cmnd_mat_sau.forEach(function(files, index, arr) {
+                    path = path + files.path + ',';
+                });
+                path = path.substring(0, path.lastIndexOf(','));
+                customer.cmnd_mat_sau = path;
+            }
             await customer.updateOne({$set: req.body});
             res.status(200).json('Updated successfully');
         } catch(err) {

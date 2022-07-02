@@ -7,10 +7,13 @@ const upload = require('../middleware/upload');
 router.post('/', upload.fields([
     { name: 'cmnd_mat_truoc', maxCount: 1 },
     { name: 'cmnd_mat_sau', maxCount: 1 },
-]),customerController.addCustomer);
+]), customerController.addCustomer);
 router.get('/', customerController.getAllCustomers);
 router.delete('/:id', customerController.deleteCustomer);
 router.get('/:id', customerController.getDetailCustomer);
-router.put('/:id', customerController.updateCustomer);
+router.put('/:id', upload.fields([
+    { name: 'cmnd_mat_truoc', maxCount: 1 },
+    { name: 'cmnd_mat_sau', maxCount: 1 },
+]), customerController.updateCustomer);
 
 module.exports = router;

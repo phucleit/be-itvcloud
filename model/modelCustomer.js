@@ -40,9 +40,6 @@ const customerSchema = new mongoose.Schema({
     cmnd_mat_sau: {
         type: String
     },
-    // hinh_cmnd: {
-    //     type: String
-    // },
     createdAt: {
         type: Date,
         default: Date.now
