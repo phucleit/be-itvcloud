@@ -58,18 +58,28 @@ const serviceController = {
     // getwebsite
     getDomainExpired: async(req, res) => {
         try {
-            const services = await Service.find({tengoidv: 'Tên miền'}).populate('website');
+            var currentDate = new Date();
+            console.log(currentDate);
+            // const services = await Service.find(
+            //     {tengoidv: "Tên miền"},
+            //     {website: {$elemMatch: {expiredAt: {$lte: currentDate}}}}
+            // ).populate('website');
+
+            const services = await Service.find(
+                { tengoidv: "Tên miền" },
+                // { website : { $elemMatch : { expiredAt : {$lte: currentDate} } } }
+            ).populate('website');
+
+            // const services = await Service.find(
+            //     { website: {
+            //         $elemMatch: {
+            //             hoten: "Phúc 1",
+            //         }
+            //     } }
+            // ).populate('website');
+
             res.status(200).json(services);
 
-            // var currentDate = new Date();
-            // const result = website.find({
-            //     expiredAt: {$lte: currentDate}
-            // });
-            // res.status(200).json(result);
-
-            // services[0].website.forEach(item => {
-            //     res.status(200).json('Updated successfully');
-            // });
         } catch(err) {
             res.status(500).json(err);
         }
