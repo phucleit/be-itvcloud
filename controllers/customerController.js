@@ -69,7 +69,9 @@ const customerController = {
                     path = path + files.path + ',';
                 });
                 path = path.substring(0, path.lastIndexOf(','));
+
                 customer.cmnd_mat_truoc = path;
+                await customer.updateOne({$set: {cmnd_mat_truoc: path}});
             }
 
             if (req.files.cmnd_mat_sau) {
@@ -79,6 +81,7 @@ const customerController = {
                 });
                 path = path.substring(0, path.lastIndexOf(','));
                 customer.cmnd_mat_sau = path;
+                await customer.updateOne({$set: {cmnd_mat_sau: path}});
             }
             await customer.updateOne({$set: req.body});
             res.status(200).json('Updated successfully');
