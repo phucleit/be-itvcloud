@@ -31,9 +31,6 @@ const customerSchema = new mongoose.Schema({
     thanhpho: {
         type: String
     },
-    quocgia: {
-        type: String
-    },
     cmnd_mat_truoc: {
         type: String
     },
