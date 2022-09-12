@@ -17,6 +17,7 @@ const statusRouter = require('./routes/status');
 const packageRouter = require('./routes/package');
 const reportRouter = require('./routes/report');
 const customerRouter = require('./routes/customer');
+const hostingRouter = require('./routes/hosting');
 
 dotenv.config({path: ".env"});
 // connect database
@@ -47,6 +48,7 @@ app.use('/api/status', statusRouter);
 app.use('/api/package', packageRouter);
 app.use('/api/report', reportRouter);
 app.use('/api/customer', customerRouter);
+app.use('/api/hosting', hostingRouter);
 
 // login
 app.use(function(req, res, next) {

@@ -6,10 +6,6 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    cmnd: {
-        type: String,
-        required: true,
-    },
     phone: {
         type: String,
         required: true
@@ -18,23 +14,9 @@ const userWebsiteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    nhanvienphutrach: {
-        type: String,
-    },
-    khuvuc: {
-        type: String,
-        required: true
-    },
-    goidungluong: {
-        type: String
-    },
     service: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Service"
-    },
-    status: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Status"
     },
     chiphi: {
         type: Number,
