@@ -19,6 +19,7 @@ const reportRouter = require('./routes/report');
 const customerRouter = require('./routes/customer');
 const hostingRouter = require('./routes/hosting');
 const emailRouter = require('./routes/email');
+const sslRouter = require('./routes/ssl');
 
 dotenv.config({path: ".env"});
 // connect database
@@ -51,6 +52,7 @@ app.use('/api/report', reportRouter);
 app.use('/api/customer', customerRouter);
 app.use('/api/hosting', hostingRouter);
 app.use('/api/email', emailRouter);
+app.use('/api/ssl', sslRouter);
 
 // login
 app.use(function(req, res, next) {
